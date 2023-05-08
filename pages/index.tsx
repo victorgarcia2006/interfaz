@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { TourCard } from "@/components/TourCard";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Inter } from "next/font/google";
+import { useEffect, useState } from "react";
 
 interface TourCardProps {
   title1: string;
