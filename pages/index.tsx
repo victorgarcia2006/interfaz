@@ -2,10 +2,13 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { TourCard } from "@/components/TourCard";
 import { useEffect, useState } from "react";
+import { useFetchNoticias } from "@/hooks/noticias";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { noticias, refetch } = useFetchNoticias();
+
   return (
     <main className="p-[32px] flex">
       <div>
@@ -32,31 +35,19 @@ export default function Home() {
         </p>
       </div>
 
-      <TourCard
-        header="NEWS"
-        imageURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSML9VA_udvq4QCFBoy49KFt3iEMrn0vm_tjQJp_ZLzIdS_3dOd"
-        date="March 20 2015"
-        title1="What happened"
-        title2="in Thailand?"
-        parrafo1="Kayaks crowd Three Sisters Springs,"
-        parrafo2="where people and manatees maintain"
-        parrafo3="controversial coexistence."
+      {noticias && noticias.map((noticias, index) => {
+        return <TourCard key={index}
+        header={noticias.type}
+        imageUrl={noticias.imageUrl}
+        date={noticias.date}
+        title1={noticias.title}
+        parrafo1={noticias.description}
         information="Find out more"
         flecha=""
       />
-
-      <TourCard
-        header="EVENT"
-        imageURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpCn4qVy86Ks1Nu_kSDN9ZECBpDqHzcoiUsVI5bz_FbEOOEUIN"
-        date="April 31 2015 "
-        title1="The funkiest"
-        title2="Medusas"
-        parrafo1="Eah day five million jellyfish glide across"
-        parrafo2="the surface of Palau´s Jellyfish Lake to "
-        parrafo3="follow the sun-streaming."
-        information="Find out more"
-        flecha=""
-      />
+      })}
+    
     </main>
   );
 }
+
